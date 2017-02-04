@@ -1,5 +1,6 @@
 angular.module('app', ['ngRoute'])
   .config(function($routeProvider) {
+    var area={}
     $routeProvider
       .when('/fizzbuzz', {
         templateUrl: 'partials/fizzbuzz.html',
@@ -18,20 +19,39 @@ angular.module('app', ['ngRoute'])
 /*  HINT: Make sure your controllers, methods, and variables 
     are named what $routeProvider and the partials are expecting  */
 
-  .factory('counter', function($routeProvider){
+  .factory('counter', function(){
+    var area={}
+    area.counter=0
+    area.display=''
     //first Initialize counter with a value of 0
-    var counter=0
+    
   })
-  .controller('fizzbuzzCtrl', function('counter'){
+  .controller('fizzbuzzCtrl', function(){
+    //define a method to handle counter
+    area.increase=function(){
+      area.counter++
+
+    }
     //if counter accept to be divided on three then I will display fizz
-    if(counter%3===0){
-      redirectTo:'/fizzbuzz'
-    }else if(counter%5===0){
+    if(area.counter%3===0){
+      area.display='fizz';
+    }else if(area.counter%5===0){
       //If the counter is divisible by five, display BUZZ
-      redirectTo:'/BUZZ'
-    }else if(counter%3===0 & counter%5===0){
+      area.display='BUZZ'
+    }else if(area.counter%15===0){
       //if the counter is divisible by both 3 and 5, display FOZZBAZZ
-      redirectTo: '/fozzbazz'
+      area.display='FOZZBAZZ'
     }
   })
-  .controller('fozzbazzCtrl', function(){});
+  .controller('fozzbazzCtrl', function(){
+    //If the counter is divisible by four, display FOZZ
+    if(area.counter%4===0){
+      area.display='FOZZ';
+    } else if(area.counter%5===0){
+      area.display='BAZZ';
+      //If the counter is divisible by six, display BAZZ
+    }else if(area.counter%20===0){
+      redirectTo  :'FOZZBAZZ'
+      //If the counter is divisible by both, display FOZZBAZZ
+    }
+  });
