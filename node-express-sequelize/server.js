@@ -9,11 +9,13 @@ var User = sequelize.define('User', {
 
 /*  Create a '/users' route that responds to 
     a GET request with all users in the database */
-app.get('/',function(req,res){
-	// when the reguest is get then 
-	// I have to display all users stored in my database
-	res.render('/user')
+app.get('/users', function (req, res) {
+	User.findAll().then(function(users){
+		res.status(200).json(users);
+	})
+	
 })
+
 
 
 module.exports = { 
